@@ -12,7 +12,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <div className="flex flex-col min-h-screen bg-linear-to-b from-white to-gray-50">
       <header className="container mx-auto py-6 px-4">
         <div className="flex items-center">
           <div className="flex items-center text-amber-500 font-bold text-xl">
@@ -30,7 +30,7 @@ export default function Home() {
                 Plataforma para criadores de conteúdo
               </div>
 
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-amber-600 to-amber-400">
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-linear-to-r from-amber-600 to-amber-400">
                 Monetize seu público de forma descomplicada
               </h1>
 
