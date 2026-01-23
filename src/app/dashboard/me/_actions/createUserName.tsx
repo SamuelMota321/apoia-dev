@@ -1,8 +1,8 @@
 'use server'
 import { z } from 'zod'
 import { auth } from '@/lib/auth'
+import { clearUsername } from '@/utils/createSlug'
 import { prisma } from '@/lib/prisma'
-import { error } from 'console'
 
 const createUserNameSchema = z.object({
   username: z.string().min(4, "É necessário que seu username tenha pelo menos 4 caracteres")
@@ -32,17 +32,31 @@ export async function createUserName(data: createUserNameFormData) {
 
   try {
     const userId = session.user.id
+    const slug = clearUsername(data.username)
+    const verifyUserName = await prisma.user.findFirst({
+      where: {
+        username: slug
+      }
+    })
+
+    if (verifyUserName) {
+      return {
+        data: null,
+        error: "Nome de Usuário já está em uso, tente outro"
+      }
+    }
+
     await prisma.user.update({
       where: {
         id: userId as string
       },
       data: {
-        username: data.username
+        username: slug
       }
     })
 
-    return  {
-      data: "Username criado com sucesso",
+    return {
+      data: slug,
       error: null
     }
 

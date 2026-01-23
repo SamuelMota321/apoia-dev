@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
-import { UrelPreview } from "./_components/url"
+import { UrlPreview } from "./_components/url"
 
 export default async function Me() {
   const session = await auth()
@@ -12,7 +12,7 @@ export default async function Me() {
   const userData = {
     id: session.user.id,
     name: session.user.name,
-    userName: session.user.name || null,
+    userName: session.user.username || null,
     bio: session.user.bio || null,
     image: session.user.image || null
 
@@ -23,7 +23,7 @@ export default async function Me() {
       <section
         className="w-full flex lg:flex-row flex-col lg:items-center mx-auto bg-zinc-900 rounded-md p-4 gap-2"
       >
-        <UrelPreview/>
+        <UrlPreview username={userData.userName}/>
       </section>
 
 
